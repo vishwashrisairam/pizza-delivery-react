@@ -1,6 +1,13 @@
 let initialState ={
     user:{
-        auth:false
+        auth:false,
+        formVariables:{
+            showProfileDetailsForm :false, 
+            showAddressForm: false , 
+            showPaymentForm: false
+        },
+        address:[],
+        payment:[]
     },
     products:[],
     cart:{},

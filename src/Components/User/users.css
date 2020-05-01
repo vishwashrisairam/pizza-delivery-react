@@ -7,5 +7,12 @@
 }
 
 .login{
-    height: 100vh;
+    height: 60vh;
+}
+.profilePage{
+    text-align: left;
+}
+
+.profilePage label{
+    font-weight: bold;
 }
