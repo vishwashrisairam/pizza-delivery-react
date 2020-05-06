@@ -22,3 +22,24 @@ code {
   bottom:0;
   margin-top:1rem;
 }
+
+
+.hide{
+  display:none
+}
+
+.loader{
+  background-color: rgba(255,255,255,0.7);
+  z-index:9999;
+  position:fixed;
+  bottom:0; 
+  left:0; 
+  top:0;
+  height:100%;
+  width:100%;
+}
+
+.loader .fas{
+  line-height:5
+
+}

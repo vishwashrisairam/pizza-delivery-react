@@ -1,4 +1,5 @@
-import {createStore,combineReducers} from 'redux';
+import {createStore,combineReducers,applyMiddleware,compose} from 'redux';
+import thunk from "redux-thunk";
 
 import userReducer from './reducers/userReducer';
 import productReducer from './reducers/productReducer';
@@ -9,12 +10,13 @@ import cartReducer from './reducers/cartReducer';
 import { loadState, saveState } from './sessionStorage';
 
 const allReducers = combineReducers({user:userReducer,products:productReducer,cart:cartReducer,test:testReducer});
-const devToolsOption = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+// const devToolsOption = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
 // const store = createStore(allReducers,initialState,composeEnhancer(applyMiddleware(session)));
 const persistedState = loadState();
 
-const store = createStore(allReducers,persistedState,devToolsOption);
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(allReducers,persistedState,composeEnhancer(applyMiddleware(thunk)));
 store.subscribe(() => {
     saveState(store.getState());
 });

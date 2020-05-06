@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 
 import './users.css';
 import {loginAction} from './../../store/actions/userActions'; 
+import Loader from '../Loader';
 
 const Login = (props) =>{
 
@@ -20,6 +21,7 @@ const Login = (props) =>{
         <Col lg="3"/>
         <Col>
         <h1>Login</h1>  
+        <Loader show ={props.isLoading}/>
         <Formik
             initialValues = {{username:'',password:''}}
             onSubmit={(values,{setSubmitting})=>{
@@ -99,7 +101,8 @@ const Login = (props) =>{
 
 const mapStateToProps = state =>{
     return {
-        userLoggedIn: state.user.auth
+        userLoggedIn: state.user.auth,
+        isLoading:state.user.loading
     }
 }
 

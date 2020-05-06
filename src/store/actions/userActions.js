@@ -1,3 +1,33 @@
+import axios from 'axios'; 
+// import history from './history';
+
+const API_HOST = 'http://localhost:3001/';
+
+
+export const setLoader = () =>{
+    return {
+        type:"SET_LOADER"        
+    }
+}
+export const removeLoader = () =>{
+    return {
+        type:"REMOVE_LOADER"        
+    }
+}
+
+export const showErrorPopup = (message) => {
+    return {
+        type:"SHOW_ERROR_POPUP",
+        payload:message
+    }
+}
+
+export const hideErrorPopup= () => {
+    return {
+        type:"HIDE_ERROR_POPUP"
+    }
+}
+
 export const loginAction = data => {
     
     return {
@@ -6,11 +36,29 @@ export const loginAction = data => {
     }
 }
 
-export const registerAction = data => {
-    return {
-        type : "REGISTER_USER", 
-        payload : data
-    }
+export const registerAction = data => dispatch => {
+    
+    // Dispatch action to set the loader 
+    dispatch(setLoader());
+    axios.post(API_HOST+'api/users/register',data)
+        .then(res =>{
+            dispatch({
+                type : "REGISTER_USER", 
+                payload : res.data.data
+            })
+            // dispatch(push('/login'));
+            // history.push('./login')
+            dispatch(removeLoader());
+            window.location='/login'
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch(showErrorPopup("Server error"));
+            dispatch(removeLoader());
+        });
+    //Dispatch action to unset the loader 
+   
+ 
 }
 
 export const logOutAction = ()=>{

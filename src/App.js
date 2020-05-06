@@ -3,6 +3,7 @@ import './App.css';
 import {Container,Row} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Switch,Route} from 'react-router-dom';
+import history from './store/actions/history';
 
 
 import testAction from './store/actions/testAction';
@@ -24,7 +25,7 @@ function App(props) {
       <Container>
         {/*Navigation bar  */}
        
-      <Router>
+      <Router history={history}>
        
       <Header/>  
       
@@ -39,23 +40,23 @@ function App(props) {
           <Route exact path="/">
             <Home/>
           </Route>
-          <Route exact path="/login">
+          <Route  path="/login">
             <Login/>
           </Route>
-          <Route exact path="/register">
+          <Route  path="/register">
             <Register/>
           </Route>
-          <Route exact path="/profile">
+          <Route  path="/profile">
             <Profile/>
           </Route>
           
-          <Route exact path="/menu">
+          <Route  path="/menu">
             <Menu/>
           </Route>
-          <Route exact path="/cart">
+          <Route  path="/cart">
             <Cart/>
           </Route>
-          <Route exact path="/contacts">
+          <Route  path="/contacts">
             <Contact/>
           </Route>
         </Switch>

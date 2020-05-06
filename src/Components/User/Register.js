@@ -1,26 +1,36 @@
 import React from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {Container,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col,Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+// import {Redirect} from 'react-router-dom';
 
 import './users.css';
-import {registerAction} from './../../store/actions/userActions';
+import Loader from '../Loader'
+import {registerAction,hideErrorPopup} from './../../store/actions/userActions';
 
 const Register = (props) =>{
 
 console.log("Registered?:",props.isRegistered);    
     
-if(props.isRegistered){ 
-    return <Redirect to='/login'/> 
-}else{
+// if(props.isRegistered){ 
+//     return <Redirect to='/login'/> 
+// }else{
     return (
         <Container>
+            {props.foundError && 
+                <Alert variant="danger" onClose={() => props.dismissError()} dismissible>
+                    <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                    <p>
+                        {props.errorMessage}
+                    </p>
+                </Alert>
+            }
             <Row>
                 <Col lg="3"/>
                 <Col>
-                    <h1>Register</h1>   
+                    <h1>Register</h1> 
+                    {props.isLoading && <Loader/>  }
                     <Formik
                         initialValues={{email:'',phoneNo:'',firstName:'',lastName:'',password:'',rePassword:''}}
                         onSubmit={(values,{setSubmitting})=>{
@@ -169,19 +179,23 @@ if(props.isRegistered){
         </Container>
 
     );
-    }
+    // }
 }
 
 const mapStateToProps = state =>{
     console.log("Registration state",state.user.registered);
     return {
-        isRegistered : state.user.registered
+        isRegistered : state.user.registered,
+        isLoading : state.user.loading,
+        foundError : state.user.error,
+        errorMessage: state.user.errorMessage
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         register : (x) => dispatch(registerAction(x)), 
+        dismissError: () => dispatch(hideErrorPopup())
     }
 }
 

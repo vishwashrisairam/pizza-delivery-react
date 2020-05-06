@@ -123,34 +123,60 @@ const user = (state= initialState, {type,payload}) =>{
         
                 } 
             }
-            case "EDIT_PAYMENT":
-                console.log('ured',payload)
-                return {
-                    ...state,
-                    payind:payload,
-                    formVariables:{
-                        ...state.formVariables,
-                        showPaymentForm : true
-                    }
+        case "EDIT_PAYMENT":
+            console.log('ured',payload)
+            return {
+                ...state,
+                payind:payload,
+                formVariables:{
+                    ...state.formVariables,
+                    showPaymentForm : true
                 }
-            case "UPDATE_PAYMENT":
-                // make service call to update the payment
-                return {
-                    ...state,
-                    payind:payload,
-                    formVariables:{
-                        ...state.formVariables,
-                        showPaymentForm : true
-                    }
+            }
+        case "UPDATE_PAYMENT":
+            // make service call to update the payment
+            return {
+                ...state,
+                payind:payload,
+                formVariables:{
+                    ...state.formVariables,
+                    showPaymentForm : true
                 }
+            }
+        
+        case "DELETE_PAYMENT":
+            let payment = state.payment;
+            payment.splice(payload,1)
+            return {
+                ...state,
+                payment: payment
+            }
+        case "SHOW_ERROR_POPUP":
+            return {
+                ...state,
+                error:true,
+                errorMessage :payload
+            }
+
+        case "HIDE_ERROR_POPUP":
+            return {
+                ...state,
+                error:false,
+                errorMessage:""
+            }
+        case "SET_LOADER":
+            return {
+                ...state,
+                loading:true 
+            }
+        
+        case "REMOVE_LOADER":
+            return {
+                ...state,
+                loading : false 
+            }
+
             
-            case "DELETE_PAYMENT":
-                let payment = state.payment;
-                payment.splice(payload,1)
-                return {
-                    ...state,
-                    payment: payment
-                }
         case 'TEST':
             return {id:'test',data:payload}
         default:

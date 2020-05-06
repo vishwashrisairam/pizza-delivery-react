@@ -6,6 +6,9 @@ let initialState ={
             showAddressForm: false , 
             showPaymentForm: false
         },
+        loading:false,
+        error:false,
+        errorMessage:"",
         address:[],
         payment:[]
     },

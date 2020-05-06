@@ -6,6 +6,10 @@
     color: red;
 }
 
+.hide {
+    display:none
+}
+
 .login{
     height: 60vh;
 }

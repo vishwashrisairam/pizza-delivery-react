@@ -1,10 +1,13 @@
-const products = (state= {}, {type,payload}) =>{
-    switch(type){
-        case 'TEST':
-            return {id:'test',data:payload}
-        default:
-            return state
+import initialState from './../initialState';
+
+const productReducer = (state = initialState, { type, payload }) => {
+    switch (type) {
+        case "FETCH_PRODUCTS":
+            console.log("entered2",payload)
+            return state.concat(payload);
+       default:
+            return state;
     }
 }
 
-export default products;
+export default productReducer;
