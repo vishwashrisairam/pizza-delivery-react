@@ -21,7 +21,7 @@ const Login = (props) =>{
         <Col lg="3"/>
         <Col>
         <h1>Login</h1>  
-        <Loader show ={props.isLoading}/>
+        {props.isLoading && <Loader/>} 
         <Formik
             initialValues = {{username:'',password:''}}
             onSubmit={(values,{setSubmitting})=>{
