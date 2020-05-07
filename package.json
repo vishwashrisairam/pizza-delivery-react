@@ -11,6 +11,7 @@
     "formik": "^2.1.4",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
+    "react-bootstrap-pagination": "^1.0.7",
     "react-dom": "^16.13.1",
     "react-next-paging": "^7.0.7",
     "react-redux": "^7.2.0",

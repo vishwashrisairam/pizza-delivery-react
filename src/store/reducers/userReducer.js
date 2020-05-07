@@ -17,7 +17,7 @@ const user = (state= initialState, {type,payload}) =>{
                 phone :'1233234323',
                 addresses:[],
                 payments:[],
-                isAdmin:false
+                isAdmin:true
             }
             
         case 'REGISTER_USER':
