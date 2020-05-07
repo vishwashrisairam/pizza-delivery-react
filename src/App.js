@@ -16,7 +16,7 @@ import Profile from './Components/User/Profile';
 import Menu from './Components/Menu';
 import Cart from './Components/Cart';
 import Contact from './Components/ContactPage';
-
+import AdminProductForm from './Components/User/AdminAddProductForm';
 
 
 function App(props) {
@@ -58,6 +58,9 @@ function App(props) {
           </Route>
           <Route  path="/contacts">
             <Contact/>
+          </Route>
+          <Route  path="/addProduct">
+            <AdminProductForm/>
           </Route>
         </Switch>
       </Row>

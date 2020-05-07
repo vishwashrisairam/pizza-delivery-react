@@ -6,7 +6,10 @@ import {connect} from 'react-redux';
 
 import {logOutAction} from './../store/actions/userActions';
 
+import '../index.css'
+
 function Header(props){
+
     console.log("Navbar",props.isLoggedUser)
     return (
         <Navbar expand="md" variant="dark" bg="dark" fixed = "top">
@@ -27,15 +30,15 @@ function Header(props){
             <Nav className="ml-auto">
               <Link to="/" className="nav-link" onClick={props.logout}>Logout</Link>
               <Link to="/profile" className="nav-link">Profile</Link>
-              <Link to="/menu" className="nav-link">Order</Link>
-              <Link to="/cart" className="nav-link">Cart</Link>
+              <Link to="/menu" className="nav-link">Menu</Link>
+              <Link to="/cart" className="nav-link">Cart<span className='badge badge-warning' id='lblCartCount'> {props.noCartItems} </span></Link>
               <Link to="/contacts" className="nav-link">Contact Us</Link> 
             </Nav>
                :
             <Nav className="ml-auto">
               <Link to="/login" className="nav-link">Login</Link>
-              <Link to="/menu" className="nav-link">Order</Link>
-              <Link to="/cart" className="nav-link">Cart</Link>
+              <Link to="/menu" className="nav-link">Menu</Link>
+              <Link to="/cart" className="nav-link">Cart<span className='badge badge-warning' id='lblCartCount'> {props.noCartItems} </span></Link>
               <Link to="/contacts" className="nav-link">Contact Us</Link> 
             </Nav>
           }
@@ -48,9 +51,10 @@ function Header(props){
 }
 
 const mapStateToProps = state =>{
-  console.log("Header state",state)
+  console.log("Header state",state.cart.items.length)
   return {
-      isLoggedUser:state.user.auth
+      isLoggedUser:state.user.auth,
+      noCartItems:state.cart.items.length
   }
 }
 
