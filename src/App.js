@@ -16,6 +16,7 @@ import Profile from './Components/User/Profile';
 import Menu from './Components/Menu';
 import Cart from './Components/Cart';
 import Contact from './Components/ContactPage';
+import Order from './Components/Order';
 
 
 
@@ -58,6 +59,9 @@ function App(props) {
           </Route>
           <Route  path="/contacts">
             <Contact/>
+          </Route>
+           <Route  path="/orders">
+            <Order/>
           </Route>
         </Switch>
       </Row>

@@ -12,8 +12,10 @@ let initialState ={
         address:[],
         payment:[]
     },
+    userid: "5ea8877caebaab0a073e031e",
     products:[],
-    cart:{},
+    cart: {},
+    order: [],
     test:{
         message:'Hello World'
     }
