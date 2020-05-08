@@ -21,7 +21,7 @@ const Home = (props) =>{
     />
     <Carousel.Caption>
       <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      <p>Tasty pizzas</p>
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
@@ -33,7 +33,7 @@ const Home = (props) =>{
 
     <Carousel.Caption>
       <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>Juicy UI</p>
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
@@ -45,17 +45,16 @@ const Home = (props) =>{
 
     <Carousel.Caption>
       <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      <p>Fast response and delivery</p>
     </Carousel.Caption>
   </Carousel.Item>
 </Carousel>
 <br/>
 <Jumbotron fluid className="bg-dark text-white">
   <Container >
-    <h1>Welcome to React's Pizza Store!</h1>
+    <h1>Welcome to React's Pizza Store</h1>
     <p>
-      This is a modified jumbotron that occupies the entire horizontal space of
-      its parent.
+      We are an online pizza delivery store, We'll reach your doorstep in 30 mins!
     </p>
   </Container>
 </Jumbotron>
@@ -65,8 +64,9 @@ const Home = (props) =>{
   <Card.ImgOverlay>
     <Card.Title>Pizzas</Card.Title>
     <Card.Text>
-      This is a wider card with supporting text below as a natural lead-in to
-      additional content. This content is a little bit longer.
+      Pizza is a savory dish of Italian origin, consisting of a usually round,
+      flattened base of leavened wheat-based dough topped with tomatoes, cheese, and 
+      often various other ingredients baked at a high temperature.
     </Card.Text>
   </Card.ImgOverlay>
 </Card>
@@ -77,8 +77,7 @@ const Home = (props) =>{
   <Card.ImgOverlay>
     <Card.Title>Drinks</Card.Title>
     <Card.Text>
-      This is a wider card with supporting text below as a natural lead-in to
-      additional content. This content is a little bit longer.
+      Liquid to satisfy your thrist and also to you some kick.
     </Card.Text>
   </Card.ImgOverlay>
 </Card>
@@ -89,8 +88,7 @@ const Home = (props) =>{
   <Card.ImgOverlay>
     <Card.Title>Sides</Card.Title>
     <Card.Text>
-      This is a wider card with supporting text below as a natural lead-in to
-      additional content. This content is a little bit longer.
+      Simply fries, pastas along with your favorite choice of sauces.
     </Card.Text>
   </Card.ImgOverlay>
 </Card>

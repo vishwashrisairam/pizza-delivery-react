@@ -5,6 +5,8 @@ const orderReducer = (state = initialState, { type, payload }) => {
         case "FETCH_ORDERS":
             console.log("entered2", payload)
             return state.concat(payload);
+        case "RESET_ORDERS":
+            return []
         default:
             return state;
     }

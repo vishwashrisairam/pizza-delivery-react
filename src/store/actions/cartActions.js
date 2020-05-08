@@ -1,4 +1,4 @@
-
+import axios from 'axios'; 
 const API_HOST = 'http://localhost:3001/';
 
 
@@ -105,8 +105,17 @@ export const hideOrderFormAction = () =>{
 }
 
 export const placeOrderAction = request => dispatch => {
+    axios.post(API_HOST + 'api/order/order', request)
+        .then(res => {
+            console.log("res", res);
+            dispatch(showSuccessPopup('Your order id is'+res.data._id+'. Please check your profile page to track the status'))
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch(showErrorPopup('Oops. We could not  complete the order.Please try again!!!'))
+        });
     // make service call 
-    dispatch(showSuccessPopup('Your order id is 12345. Please check your profile page to track the status'))
+    //dispatch(showSuccessPopup('Your order id is 12345. Please check your profile page to track the status'))
 
     // dispatch(showErrorPopup('Oops. We could not  complete the order.Please try again!!!'))
 }

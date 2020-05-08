@@ -37,7 +37,7 @@ const OrderForm = (props) =>{
                             let placeOrderRequest={
                                 userId:props.user._id,
                                 name:props.user.firstName + ' '+ props.user.lastName,
-                                item:props.items,
+                                items:props.items,
                                 orderAmount:props.amount,
                                 deliveryAddress:{
                                     addressLine1:values.addressLine1,

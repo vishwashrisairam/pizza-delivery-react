@@ -110,15 +110,6 @@ const Menu = (props) =>{
         </Container>
             );
 }
-/*
-const componentDidMount = (props) => {
-<<<<<<< HEAD
-    return props.fetchProducts
-=======
-    return props.fetchProducts
->>>>>>> b9c97d30e7ecdb3120296be8b6d42d6ea4b815e7
-}
-*/
 
 
 const mapStateToProps = state => {

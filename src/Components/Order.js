@@ -1,42 +1,63 @@
-import React from 'react';
-import { Card, Button, ButtonGroup, CardDeck } from 'react-bootstrap'
+import React, { useEffect } from 'react';
+import { Row, Container } from 'react-bootstrap'
 import { connect } from 'react-redux';
-import fetchOrdersAction from '../store/actions/orderAction'
+import { fetchOrdersAction,resetOrdersAction } from '../store/actions/orderAction'
 import pizza2 from '../assests/images/pizza-2.jpg';
 
 
 
 const Order = (props) => {
+    const fetchOrders = () => props.fetchOrders();
+    useEffect(() => {
+        console.log('fetch products')
+        fetchOrders();
+        return () => {
+            props.resetOrders();
+        }
+    }, []);
     console.log('log products', props.orders)
     return (
-        <div>
-        <h1>Order page</h1>
-         Orders: <button onClick={props.fetchOrders}> Fetch Orders</button>
-            <CardDeck style={{ display: 'flex', flexDirection: 'column' }}>
-                <br />
+        <Container>
+        <h3>Your previous orders</h3>
+            <br />
+            <Row>
                 {
                     props.orders.length === 0 ? <p> No orders found</p> :
-                        props.orders.map((order, index) => (
-                            <div key={index}>
+                        <div className="table-responsive">
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col" >Quantity</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Ordered date</th>
+                                        <th scope="col" >Status</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {props.orders.map((order, index) => {
+                                        return(order.items.map((item, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                <td >{item.productName}</td>
+                                                <td >{item.quantity}</td>
+                                                <td >{item.price}</td>
+                                                <td >{order.date}</td>
+                                                <td >{order.status}</td>
+                                            </tr>)
+                                            })
+                                            )
+                                        
+                                    })}
 
-                                <Card style={{ width: '18rem', flex: 1 }} >                                    <Card.Body>
-                                        <Card.Title>{order._id}</Card.Title>
-                                        <Card.Text>
-                                            {order.isCancelled}
-                                        </Card.Text>
-                                        <ButtonGroup aria-label="Basic example">
-                                            <Button variant="secondary">Edit</Button>
-                                            <Button variant="secondary">delete</Button>
-                                        </ButtonGroup>
-                                    </Card.Body>
-                                </Card>
-
+                                </tbody>
+                            </table>
                             </div>
-                        ))
                 }
 
-            </CardDeck>
-        </div>
+            </Row>
+        </Container>
         
     );
 }
@@ -55,7 +76,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchOrders: () => { dispatch(fetchOrdersAction) }
+        fetchOrders: () => { dispatch(fetchOrdersAction) },
+        resetOrders: () => { dispatch(resetOrdersAction)}
 
     }
 }
