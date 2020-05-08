@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Container,Row,Col,Alert} from 'react-bootstrap';
@@ -8,9 +8,16 @@ import {Redirect} from 'react-router-dom';
 import './users.css';
 import Loader from '../Loader'
 import {hideErrorPopup} from './../../store/actions/userActions';
-import {addNewProductAction} from './../../store/actions/productAction';
+import {addNewProductAction,resetEditProductAction,updateProductAction} from './../../store/actions/productAction';
 
 const AdminAddProductForm = (props) =>{
+
+useEffect(() => {    
+    // returned function will be called on component unmount 
+    return () => {
+        props.resetEdit()
+    }
+    }, [])
 
 console.log("IsAdmin?:",props.isAdmin);    
     
@@ -30,29 +37,35 @@ if(!props.isAdmin){
             <Row>
                 <Col lg="3"/>
                 <Col>
-                    <h1>Add a new Product</h1> 
+                    {props.isEdit ? <h1>Edit Product</h1>  : <h1>Add a new Product</h1> }
+                    
                     {props.isLoading && <Loader/>  }
                     <Formik
-                        initialValues={{category:'',name:'',description:'',price:'',file:null}}
+                        initialValues={props.iv}
                         onSubmit={(values,{setSubmitting})=>{
                             console.log("Add new  product form",values)
                             setSubmitting(false);
 
                             let formData = new FormData();
-                            formData.append('category',values.catefory)
-                            formData.append('name',values.name)
+                            formData.append('category',values.category)
+                            formData.append('productName',values.name)
                             formData.append('description',values.description)
                             formData.append('price',values.price)
                             formData.append('pic',values.pic)
 
-                            props.addProduct(formData);
+                            if(props.isEdit){
+                                props.editProduct(props.isEdit,formData);
+                            }else{
+                                props.addProduct(formData);
+                            }
+                            
 
                         }}
                         validationSchema={Yup.object().shape({
                             category: Yup.string().required("Required"),
                             name : Yup.string().required("Required").max(20,"Maximum 20 characters"),
                             description : Yup.string().required("Required").max(200,"Maximum 200 characters"),
-                            price:Yup.string().required("Requried").matches(/^\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})$/,"Enter in format dd.cc"),
+                            price:Yup.string().required("Requried").matches(/^(\d+(\.\d{1,2})?)$/,"x or x.d or x.dd"),
                             
                         })}
                         >
@@ -152,7 +165,7 @@ if(!props.isAdmin){
                                     {/* Submit buttons */}
                                     <Row className="form-group">
                                     
-                                        <button type="submit" disabled={!(formik.isValid && formik.dirty) } className="btn btn-primary btn-lg">
+                                        <button type="submit" disabled={!(formik.isValid ) } className="btn btn-primary btn-lg">
                                             Add
                                         </button>
                                         
@@ -173,19 +186,35 @@ if(!props.isAdmin){
 }
 
 const mapStateToProps = state =>{
-    console.log("Registration state",state.user.registered);
+    let initialValue = {category:'',name:'',description:'',price:'',pic:null}
+    if(state.products.edit){
+        let allItems = state.products.items 
+        let currentItem = allItems.find(x=>x._id===state.products.edit)
+        initialValue = {
+            category:currentItem.category?currentItem.category:"",
+            name:currentItem.productName?currentItem.productName:"",
+            description:currentItem.description?currentItem.description:"",
+            price:currentItem.price?currentItem.price:"",
+            pic:currentItem.productImage
+        }
+
+    }
     return {
         isAdmin : state.user.isAdmin,
-        isLoading : state.user.loading,
-        foundError : state.user.error,
-        errorMessage: state.user.errorMessage
+        isEdit : state.products.edit,
+        iv:initialValue,
+        isLoading : state.products.loading,
+        foundError : state.products.error,
+        errorMessage: state.products.errorMessage
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         addProduct : (x) => dispatch(addNewProductAction(x)), 
-        dismissError: () => dispatch(hideErrorPopup())
+        editProduct : (id,x) => dispatch(updateProductAction(id,x)),
+        dismissError: () => dispatch(hideErrorPopup()),
+        resetEdit: () => dispatch(resetEditProductAction())
     }
 }
 

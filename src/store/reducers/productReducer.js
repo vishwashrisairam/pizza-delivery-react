@@ -58,6 +58,17 @@ const productReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 loading : false 
             }
+        case "EDIT_PRODUCT":
+            return {
+                ...state,
+                edit: payload
+            }
+        case "RESET_EDIT":
+            return {
+                ...state,
+                edit:undefined
+            }
+
        default:
             return state;
     }

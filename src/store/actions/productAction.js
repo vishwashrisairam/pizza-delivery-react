@@ -32,11 +32,12 @@ export const hideErrorPopup= () => {
 
 
 const fetchProductsAction = (dispatch) => {
-
+    dispatch(setLoader());
     fetch('http://localhost:3001/api/products/products').then((response) => {
         return response.json();
     }).then((res) => {
         console.log('result',res.length)
+        dispatch(removeLoader());
         let activePageitems = res.slice(0,Math.min(ITEMS_PER_PAGE,res.length));
         dispatch({ type: FETCH_PRODUCTS, payload: {
             items:res,
@@ -49,21 +50,72 @@ const fetchProductsAction = (dispatch) => {
 }
 
 export const addNewProductAction = data => dispatch => {
-
-    for (var pair of data.entries())
-    {
-        console.log(pair[0]+ ', '+ pair[1]);    
-    }
-    
+    console.log('add product action')
+    dispatch(setLoader());
     axios.post(API_HOST+'api/products/products',data)
         .then(res=>{
             console.log('add new product success',res)
+            dispatch(removeLoader());
+            dispatch(resetEditProductAction());
+            window.location='/menu'
         })
         .catch(err=>{
             console.log('add new product error',err)
+            dispatch(showErrorPopup("Server error"));
+            dispatch(removeLoader());
+        })
+       
+
+}
+
+
+export const updateProductAction = (id,data) => dispatch => {
+    console.log('update product action')
+    dispatch(setLoader());
+    axios.patch(API_HOST+'api/products/products/'+id,data)
+        .then(res=>{
+            console.log('update product success',res)
+            dispatch(removeLoader());
+            dispatch(resetEditProductAction());
+            window.location='/menu'
+        })
+        .catch(err=>{
+            console.log('update product error',err)
+            dispatch(showErrorPopup("Server error"));
+            dispatch(removeLoader());
         })
 
 }
+
+export const editProductAction = (id) =>{
+    return {
+        type: "EDIT_PRODUCT",
+        payload:id
+        
+    }
+} 
+
+export const deleteProductAction = id  => dispatch => {
+    dispatch(setLoader());
+    axios.delete(API_HOST+'api/products/products/'+id)
+    .then(res=>{
+        console.log('delete product success',res)
+        dispatch(removeLoader());
+        window.location='/menu'
+    })
+    .catch(err=>{
+        console.log('delete product error',err)
+        dispatch(showErrorPopup("Server error"));
+        dispatch(removeLoader());
+    })
+}
+
+export const resetEditProductAction = (id) =>{
+    return {
+        type: "RESET_EDIT",
+        
+    }
+} 
 
 export const gotoPageAction = (index) => {
 
@@ -101,7 +153,6 @@ export const searchAction =(key,items) => {
     console.log('s',key,items)
     let filteredItems=[]
     filteredItems = items.filter(x => x.productName.toLowerCase().includes(key.toLowerCase()));
-   
 
     console.log('search action',filteredItems)
 

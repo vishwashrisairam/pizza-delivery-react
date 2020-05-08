@@ -28,12 +28,26 @@ export const hideErrorPopup= () => {
     }
 }
 
-export const loginAction = data => {
+export const loginAction = data => dispatch=>{
+    dispatch(setLoader());
+    axios.post(API_HOST+'api/users/login',data)
+        .then(res=> {
+            console.log('login api call',res)
+            dispatch({
+                type : "LOGIN_USER",
+                payload: res.data.user
+            })
+            dispatch(removeLoader());
+            // window.location='/profile'
+        })
+        .catch(error => {
+            console.log('login error',error.response)
+            let status = error.response.status;
+            let responseMessage = status === 500 ? "Username/Password combination not correct":"User not found"
+            dispatch(showErrorPopup(responseMessage));
+            dispatch(removeLoader());
+        });
     
-    return {
-        type : "LOGIN_USER",
-        payload: data
-    }
 }
 
 export const registerAction = data => dispatch => {
@@ -61,11 +75,25 @@ export const registerAction = data => dispatch => {
  
 }
 
-export const logOutAction = ()=>{
-    return {
-        type:"LOGOUT_USER",
-        payload :''
-    }
+export const logOutAction = ()=> dispatch =>{
+    dispatch(setLoader());
+    axios.get(API_HOST+'api/users/logout')
+        .then(res =>{
+            dispatch({
+                type : "LOGOUT_USER",
+            })
+            dispatch(removeLoader());
+            window.location='/'
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch(showErrorPopup("Server error"));
+            dispatch(removeLoader());
+        });
+    // return {
+    //     type:"LOGOUT_USER",
+    //     payload :''
+    // }
 }
 
 export const toggleProfileDetailsFormAction = (value) => {

@@ -23,6 +23,7 @@ let initialState ={
         loading:false,
         error:false,
         errorMessage:"",
+        edit:undefined 
     },
     cart:{
         items:[],
