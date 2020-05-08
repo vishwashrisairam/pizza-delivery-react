@@ -14,6 +14,7 @@ import './users.css';
 import ProfileEditForm from './ProfileForm';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
+import { CardBody } from 'react-bootstrap/Card';
 
 
 const Profile = (props) =>{
@@ -169,7 +170,15 @@ const Profile = (props) =>{
                     </Accordion.Collapse>
                 </Card>
             </Accordion>
-
+            <Accordion>
+                <Card>
+                    <Card.Body>
+                        <Button href="/orders" variant="secondary" size="sm" className="float-left">
+                            View Orders History
+                            </Button>
+                    </Card.Body>
+                </Card>
+                </Accordion>
         </Container>
     )
     }

@@ -1,3 +1,4 @@
+
 import React,{useEffect } from 'react';
 import {Container, Card, Button, ButtonGroup, CardDeck,Pagination,Dropdown,Row,Col,InputGroup,FormControl,Alert } from 'react-bootstrap'
 import { connect } from 'react-redux';
@@ -36,6 +37,7 @@ const Menu = (props) =>{
     
 
     return (
+
         <Container>
         {props.foundError && 
             <Alert variant="danger" onClose={() => props.dismissError()} dismissible>
@@ -125,6 +127,7 @@ const Menu = (props) =>{
                     </div>
                     ))
                 }
+
              
             </CardDeck>
             </Row>
@@ -133,11 +136,6 @@ const Menu = (props) =>{
         </Container>
             );
 }
-/*
-const componentDidMount = (props) => {
-    return props.fetchProducts
-}
-*/
 
 
 const mapStateToProps = state => {

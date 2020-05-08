@@ -1,3 +1,4 @@
+
 let initialState ={
     user:{
         auth:false,
@@ -13,6 +14,7 @@ let initialState ={
         payment:[],
         cart:[]
     },
+    order:[],
     products:{
         allItems:[],
         items:[],
