@@ -1,12 +1,12 @@
 import React from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {Container,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col,Alert} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 
 import './users.css';
-import {loginAction} from './../../store/actions/userActions'; 
+import {loginAction,hideErrorPopup} from './../../store/actions/userActions'; 
 import Loader from '../Loader';
 
 const Login = (props) =>{
@@ -17,6 +17,14 @@ const Login = (props) =>{
     }else{
     return (
         <Container className="login">
+         {props.foundError && 
+                <Alert variant="danger" onClose={() => props.dismissError()} dismissible>
+                    <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                    <p>
+                        {props.errorMessage}
+                    </p>
+                </Alert>
+            }
         <Row>
         <Col lg="3"/>
         <Col>
@@ -26,6 +34,8 @@ const Login = (props) =>{
             initialValues = {{username:'',password:''}}
             onSubmit={(values,{setSubmitting})=>{
                 setSubmitting(false);
+                console.log(values)
+                
                 props.login(values)                
                 
             }}
@@ -102,13 +112,16 @@ const Login = (props) =>{
 const mapStateToProps = state =>{
     return {
         userLoggedIn: state.user.auth,
-        isLoading:state.user.loading
+        isLoading : state.user.loading,
+        foundError : state.user.error,
+        errorMessage: state.user.errorMessage
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         login : (data) => dispatch(loginAction(data)),
+        dismissError: () => dispatch(hideErrorPopup())
     }
 }
 

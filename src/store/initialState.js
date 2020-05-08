@@ -1,43 +1,44 @@
-let initialState = {
-    user: {
-        auth: false,
-        formVariables: {
-            showProfileDetailsForm: false,
-            showAddressForm: false,
+
+let initialState ={
+    user:{
+        auth:false,
+        formVariables:{
+            showProfileDetailsForm :false, 
+            showAddressForm: false , 
             showPaymentForm: false
         },
-        loading: false,
-        error: false,
-        errorMessage: "",
-        address: [],
-        payment: [],
-        cart: []
+        loading:false,
+        error:false,
+        errorMessage:"",
+        address:[],
+        payment:[],
+        cart:[]
     },
-    userid: "5ea8877caebaab0a073e031e",
     order:[],
-    products: {
-        allItems: [],
-        items: [],
-        activePage: 0,
-        activePageItems: [],
-        searchKey: "",
-        itemsPerPage: 6,
-        loading: false,
-        error: false,
-        errorMessage: "",
+    products:{
+        allItems:[],
+        items:[],
+        activePage:0,
+        activePageItems:[],
+        searchKey:"",
+        itemsPerPage:6,
+        loading:false,
+        error:false,
+        errorMessage:"",
+        edit:undefined 
     },
-    cart: {
-        items: [],
-        totalPrice: 0,
-        showOrderForm: false,
-        loading: false,
-        error: false,
-        errorMessage: "",
-        orderSuccessful: undefined,
-        orderMessage: ""
+    cart:{
+        items:[],
+        totalPrice:0,
+        showOrderForm : false,
+        loading:false,
+        error:false,
+        errorMessage:"",
+        orderSuccessful:undefined,
+        orderMessage:""
     },
-    test: {
-        message: 'Hello World'
+    test:{
+        message:'Hello World'
     }
 };
 
