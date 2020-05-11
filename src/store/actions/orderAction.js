@@ -1,9 +1,9 @@
 import initialState from './../initialState';
 
-export const fetchOrdersAction = (dispatch) => {
+export const fetchOrdersAction = userId =>dispatch => {
     //console.log("entered1")
-    //console.log("initial state user id", initialState.userid)
-    fetch('http://localhost:3001/api/order/order/' + initialState.userid).then((response) => {
+    console.log("initial state user id", userId)
+    fetch('http://localhost:3001/api/order/order/' + userId).then((response) => {
         return response.json();
     }).then((res) => {
         console.log('result', res)

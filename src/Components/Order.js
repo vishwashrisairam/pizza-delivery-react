@@ -7,10 +7,10 @@ import pizza2 from '../assests/images/pizza-2.jpg';
 
 
 const Order = (props) => {
-    const fetchOrders = () => props.fetchOrders();
+    const fetchOrders = (id) => props.fetchOrders(id);
     useEffect(() => {
         console.log('fetch products')
-        fetchOrders();
+        fetchOrders(props.userId);
         return () => {
             props.resetOrders();
         }
@@ -70,13 +70,14 @@ const componentDidMount = (props) => {
 
 const mapStateToProps = state => {
     return {
-        orders: state.order
+        orders: state.order,
+        userId:state.user.userId
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchOrders: () => { dispatch(fetchOrdersAction) },
+        fetchOrders: (id) => { dispatch(fetchOrdersAction(id)) },
         resetOrders: () => { dispatch(resetOrdersAction)}
 
     }

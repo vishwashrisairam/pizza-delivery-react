@@ -20,7 +20,7 @@ const Home = (props) =>{
       alt="First slide"
     />
     <Carousel.Caption>
-      <h3>First slide label</h3>
+      <h3>Pizzas</h3>
       <p>Tasty pizzas</p>
     </Carousel.Caption>
   </Carousel.Item>
@@ -32,7 +32,7 @@ const Home = (props) =>{
     />
 
     <Carousel.Caption>
-      <h3>Second slide label</h3>
+      <h3>Order</h3>
       <p>Juicy UI</p>
     </Carousel.Caption>
   </Carousel.Item>
@@ -44,7 +44,7 @@ const Home = (props) =>{
     />
 
     <Carousel.Caption>
-      <h3>Third slide label</h3>
+      <h3>Delivery</h3>
       <p>Fast response and delivery</p>
     </Carousel.Caption>
   </Carousel.Item>
@@ -62,7 +62,7 @@ const Home = (props) =>{
 <Card border= "dark" className="bg-dark text-white">
   <Card.Img src={pizza9} alt="Card image" />
   <Card.ImgOverlay>
-    <Card.Title>Pizzas</Card.Title>
+    <Card.Title>Delivery</Card.Title>
     <Card.Text>
       Pizza is a savory dish of Italian origin, consisting of a usually round,
       flattened base of leavened wheat-based dough topped with tomatoes, cheese, and 

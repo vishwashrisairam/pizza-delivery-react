@@ -7,7 +7,6 @@ const user = (state= initialState, {type,payload}) =>{
         case 'LOGIN_USER':
             console.log("inside login user reducer",state);
             console.log('login payload',payload)
-            //  Make service call to authenitcate the user 
             return  {
                 ...state,
                 auth:true , 
@@ -19,7 +18,7 @@ const user = (state= initialState, {type,payload}) =>{
                 phone :payload.phoneNumber?payload.phoneNumber:"",
                 addresses:payload.address,
                 payments:payload.payment,
-                isAdmin:true
+                isAdmin:payload.isAdmin
             }
             
         case 'REGISTER_USER':
